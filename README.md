@@ -1,4 +1,4 @@
-# WMZQuickKit - 链式编程快速写UIKit控件 只需要引入一个文件即可
+# WMZQuickKit - 链式编程快速写UIKit控件 一般只需要引入一个文件即可
 
 ```
 //通用属性写后面 不然会点不出来
@@ -197,7 +197,7 @@
 
 许可证
 ==============
-WMZDialog 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
+WMZQuickKit 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 
 
 个人主页
