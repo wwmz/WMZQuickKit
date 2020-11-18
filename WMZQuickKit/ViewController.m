@@ -20,178 +20,178 @@
     
     //通用属性写后面 不然会点不出来
     //UIScrollView
-    UIScrollView *scrollView = [UIScrollView mz_view:^(UIScrollView * _Nonnull scrollView){
+    UIScrollView *scrollView = Add_ScrollView(^(UIScrollView * _Nonnull scrollView) {
          scrollView
-        .mz_showsVerticalScrollIndicator(NO)
-        .mz_constraints(^(MASConstraintMaker * _Nullable make) {
+        .add_showsVerticalScrollIndicator(NO)
+        .add_constraints(^(MASConstraintMaker * _Nullable make) {
             make.edges.mas_equalTo(0);
         }, self.view);
-    }];
+    });
     
     
      //UIView使用
-    UIView *mainView = [UIView mz_view:^(UIView * _Nullable view) {
+    UIView *mainView = Add_View(^(UIView * _Nullable view) {
          view
-         .mz_backgroundColor([UIColor whiteColor])
-         .mz_superView(scrollView)
-         .mz_constraints(^(MASConstraintMaker * _Nullable make) {
+         .add_backgroundColor([UIColor whiteColor])
+         .add_superView(scrollView)
+         .add_constraints(^(MASConstraintMaker * _Nullable make) {
              make.top.bottom.left.mas_equalTo(0);
              make.width.mas_equalTo([UIScreen mainScreen].bounds.size.width);
          }, scrollView);
-     }];
+     });
     
-    //UIView使用
-   [UIView mz_view:^(UIView * _Nullable view) {
+    //UIView使用 类方法通用写法 add_view 开头
+    [UIView add_view:^(UIView * _Nonnull view) {
         view
-        .mz_backgroundColor([UIColor redColor])
-        .mz_cornerRadius(15)
-        .mz_superView(mainView)
-        .mz_frame(CGRectMake(20, 60, UIScreen.mainScreen.bounds.size.width - 40, 30))
-        .mz_event(^(UIView * _Nonnull sender) {
+        .add_backgroundColor([UIColor redColor])
+        .add_cornerRadius(15)
+        .add_superView(mainView)
+        .add_frame(CGRectMake(20, 60, UIScreen.mainScreen.bounds.size.width - 40, 30))
+        .add_event(^(UIView * _Nonnull sender) {
             NSLog(@"点击");
-         });
+        });
     }];
     
     //UILabel使用
-    [UILabel mz_view:^(UILabel * _Nonnull label) {
+    Add_Label(^(UILabel * _Nonnull label) {
         label
-        .mz_text(@"快速创建文本")
-        .mz_textAlignment(NSTextAlignmentCenter)
-        .mz_textColor([UIColor redColor])
-        .mz_font([UIFont systemFontOfSize:15.0f])
-        .mz_constraints(^(MASConstraintMaker * _Nullable make) {
+        .add_text(@"快速创建文本")
+        .add_textAlignment(NSTextAlignmentCenter)
+        .add_textColor([UIColor redColor])
+        .add_font([UIFont systemFontOfSize:15.0f])
+        .add_constraints(^(MASConstraintMaker * _Nullable make) {
             make.left.mas_equalTo(10);
             make.right.mas_equalTo(-10);
             make.top.mas_equalTo(100);
         }, mainView);
-    }];
+    });
     
     //UIButton使用
-    [UIButton mz_view:^(UIButton * _Nonnull button) {
+    Add_Button(^(UIButton * _Nonnull button) {
         button
-        .mz_title(@"点击文字变红色")
-        .mz_font([UIFont systemFontOfSize:14.0f])
-        .mz_titleColor([UIColor whiteColor])
-        .mz_state_titleColor([UIColor redColor], UIControlStateSelected)
-        .mz_event(^(UIView * _Nonnull sender) {  //点击事件
+        .add_title(@"点击文字变红色")
+        .add_font([UIFont systemFontOfSize:14.0f])
+        .add_titleColor([UIColor whiteColor])
+        .add_state_titleColor([UIColor redColor], UIControlStateSelected)
+        .add_event(^(UIView * _Nonnull sender) {  //点击事件
             button.selected = ![button isSelected];
         })
-        .mz_frame(CGRectMake(60, 130, UIScreen.mainScreen.bounds.size.width - 120, 44))
-        .mz_superView(mainView)
-        .mz_backgroundColor([UIColor blueColor])
-        .mz_cornerRadius(22);
-    }];
+        .add_frame(CGRectMake(60, 130, UIScreen.mainScreen.bounds.size.width - 120, 44))
+        .add_superView(mainView)
+        .add_backgroundColor([UIColor blueColor])
+        .add_cornerRadius(22);
+    });
     
     //UIImageView
-    [UIImageView mz_view:^(UIImageView * _Nonnull imageView) {
+    Add_ImageView(^(UIImageView * _Nonnull imageView) {
        imageView
-        .mz_image([UIImage imageNamed:@"timg"])
-        .mz_contentMode(UIViewContentModeScaleAspectFill)
-        .mz_frame(CGRectMake(([UIScreen mainScreen].bounds.size.width - 80)/2, 180, 80, 80))
-        .mz_cornerRadius(40)  //放在设置frame后面
-        .mz_superView(mainView);
-    }];
+        .add_image([UIImage imageNamed:@"timg"])
+        .add_contentMode(UIViewContentModeScaleAspectFill)
+        .add_frame(CGRectMake(([UIScreen mainScreen].bounds.size.width - 80)/2, 180, 80, 80))
+        .add_cornerRadius(40)  //放在设置frame后面
+        .add_superView(mainView);
+    });
     
     
     //UITextField
-    [UITextField mz_view:^(UITextField * _Nonnull textField) {
+    Add_TextField(^(UITextField * _Nonnull textField) {
        textField
-        .mz_delegate(self)
-        .mz_placeholder(@"请输入")
-        .mz_textColor([UIColor blackColor])
-        .mz_textAlignment(NSTextAlignmentCenter)
-        .mz_frame(CGRectMake(60, 270, UIScreen.mainScreen.bounds.size.width - 120, 40))
-        .mz_superView(mainView);
-    }];
+        .add_delegate(self)
+        .add_placeholder(@"请输入")
+        .add_textColor([UIColor blackColor])
+        .add_textAlignment(NSTextAlignmentCenter)
+        .add_frame(CGRectMake(60, 270, UIScreen.mainScreen.bounds.size.width - 120, 40))
+        .add_superView(mainView);
+    });
     
     //UISwitch
-    [UISwitch mz_view:^(UISwitch * _Nonnull switc) {
+    Add_Switch(^(UISwitch * _Nonnull switc) {
         switc
-        .mz_onTintColor([UIColor blueColor])
-        .mz_event(^(UIView * _Nonnull sender) {  //切换事件
+        .add_onTintColor([UIColor blueColor])
+        .add_event(^(UIView * _Nonnull sender) {  //切换事件
             NSLog(@"切换%d",switc.on);
         })
-        .mz_frame(CGRectMake(([UIScreen mainScreen].bounds.size.width - 60)/2, 320, 60, 40))
-        .mz_superView(mainView);
-    }];
+        .add_frame(CGRectMake(([UIScreen mainScreen].bounds.size.width - 60)/2, 320, 60, 40))
+        .add_superView(mainView);
+    });
     
     //UITextView
-    [UITextView mz_view:^(UITextView * _Nonnull textView) {
+    Add_TextView(^(UITextView * _Nonnull textView) {
          textView
-        .mz_delegate(self)
-        .mz_font([UIFont systemFontOfSize:15.0f])
-        .mz_text(@"UITextView")
-        .mz_textColor([UIColor blackColor])
-        .mz_textAlignment(NSTextAlignmentCenter)
-        .mz_frame(CGRectMake(60, 370, UIScreen.mainScreen.bounds.size.width - 120, 80))
-        .mz_backgroundColor([UIColor lightGrayColor])
-        .mz_cornerRadius(20)
-        .mz_superView(mainView);
-    }];
+        .add_delegate(self)
+        .add_font([UIFont systemFontOfSize:15.0f])
+        .add_text(@"UITextView")
+        .add_textColor([UIColor blackColor])
+        .add_textAlignment(NSTextAlignmentCenter)
+        .add_frame(CGRectMake(60, 370, UIScreen.mainScreen.bounds.size.width - 120, 80))
+        .add_backgroundColor([UIColor lightGrayColor])
+        .add_cornerRadius(20)
+        .add_superView(mainView);
+    });
     
     //UISlider
-    [UISlider mz_view:^(UISlider * _Nonnull slider) {
+    Add_Slider(^(UISlider * _Nonnull slider) {
         slider
-        .mz_minimumValue(0)
-        .mz_maximumValue(100)
-        .mz_value(50)
-        .mz_thumbTintColor([UIColor redColor])
-        .mz_minimumTrackTintColor([UIColor greenColor])
-        .mz_maximumTrackTintColor([UIColor redColor])
-        .mz_event(^(UIView * _Nonnull sender) {  //切换事件
+        .add_minimumValue(0)
+        .add_maximumValue(100)
+        .add_value(50)
+        .add_thumbTintColor([UIColor redColor])
+        .add_minimumTrackTintColor([UIColor greenColor])
+        .add_maximumTrackTintColor([UIColor redColor])
+        .add_event(^(UIView * _Nonnull sender) {  //切换事件
             NSLog(@"改变%f",slider.value);
         })
-        .mz_frame(CGRectMake(60, 450, UIScreen.mainScreen.bounds.size.width - 120, 40))
-        .mz_superView(mainView);
-    }];
+        .add_frame(CGRectMake(60, 450, UIScreen.mainScreen.bounds.size.width - 120, 40))
+        .add_superView(mainView);
+    });
     
     //UIProgressView
-    [UIProgressView mz_view:^(UIProgressView * _Nonnull progressView) {
+    Add_ProgressView(^(UIProgressView * _Nonnull progressView) {
         progressView
-        .mz_progressViewStyle(UIProgressViewStyleDefault)
-        .mz_progress(0.5)
-        .mz_progressTintColor([UIColor redColor])
-        .mz_trackTintColor([UIColor greenColor])
-        .mz_frame(CGRectMake(60, 500, UIScreen.mainScreen.bounds.size.width - 120, 40))
-        .mz_superView(mainView);
-    }];
+        .add_progressViewStyle(UIProgressViewStyleDefault)
+        .add_progress(0.5)
+        .add_progressTintColor([UIColor redColor])
+        .add_trackTintColor([UIColor greenColor])
+        .add_frame(CGRectMake(60, 500, UIScreen.mainScreen.bounds.size.width - 120, 40))
+        .add_superView(mainView);
+    });
     
     //UITableView
-    [UITableView mz_view:^(UITableView * _Nonnull tableView) {
+    Add_TableView(^(UITableView * _Nonnull tableView) {
         tableView
-        .mz_dataSource(self)
-        .mz_delegate(self)
-        .mz_keyboardDismissMode(UIScrollViewKeyboardDismissModeOnDrag)
-        .mz_separatorStyle(UITableViewCellSeparatorStyleNone)
-        .mz_registerCellClass(@[@"UITableViewCell"])
-        .mz_frame(CGRectMake(0, 550, UIScreen.mainScreen.bounds.size.width, 100))
-        .mz_superView(mainView);
-    } style:UITableViewStyleGrouped];
-    
+        .add_dataSource(self)
+        .add_delegate(self)
+        .add_keyboardDismissMode(UIScrollViewKeyboardDismissModeOnDrag)
+        .add_separatorStyle(UITableViewCellSeparatorStyleNone)
+        .add_registerCellClass(@[@"UITableViewCell"])
+        .add_frame(CGRectMake(0, 550, UIScreen.mainScreen.bounds.size.width, 100))
+        .add_superView(mainView);
+    }, UITableViewStyleGrouped);
     
     
     //UICollectionViewFlowLayout
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout mz_flowLayout:10 minimumInteritemSpacing:10 sectionInset:UIEdgeInsetsZero block:^(UICollectionViewFlowLayout * _Nonnull collectionView) {
-        collectionView.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width/3-10, 50);
-    }];
+    UICollectionViewFlowLayout *layout = Add_FlowLayout(10, 10, UIEdgeInsetsZero, ^(UICollectionViewFlowLayout * _Nonnull collectionView) {
+          collectionView.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width/3-10, 50);
+    });
+    
     
     //UICollectionView
-    [UICollectionView mz_view:^(UICollectionView * _Nonnull collectionView) {
+    Add_CollectionView(^(UICollectionView * _Nonnull collectionView) {
         collectionView
-        .mz_dataSource(self)
-        .mz_delegate(self)
-        .mz_showsVerticalScrollIndicator(NO)
-        .mz_showsHorizontalScrollIndicator(NO)
-        .mz_keyboardDismissMode(UIScrollViewKeyboardDismissModeOnDrag)
-        .mz_registerCellClass(@[@"UICollectionViewCell"])
-        .mz_constraints(^(MASConstraintMaker * _Nullable make) {
+        .add_dataSource(self)
+        .add_delegate(self)
+        .add_showsVerticalScrollIndicator(NO)
+        .add_showsHorizontalScrollIndicator(NO)
+        .add_keyboardDismissMode(UIScrollViewKeyboardDismissModeOnDrag)
+        .add_registerCellClass(@[@"UICollectionViewCell"])
+        .add_constraints(^(MASConstraintMaker * _Nullable make) {
             make.top.mas_equalTo(680);
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(200);
             make.bottom.mas_equalTo(0);
         }, mainView)
-        .mz_backgroundColor([UIColor whiteColor]);
-    } layout:layout];
+        .add_backgroundColor([UIColor whiteColor]);
+    }, layout);
     
 }
 

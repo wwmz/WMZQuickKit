@@ -14,9 +14,9 @@
             filePath = "WMZQuickKit/WMZQuickKit/UIView+WMZQuickView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-mz_cornerRadius"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-add_cornerRadius"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

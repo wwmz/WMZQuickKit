@@ -32,30 +32,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (WMZQuickView)
 /*!
-* @brief init
+* @brief init 类方法
 */
-+ (UIView*)mz_view:(nullable QuickCustomView)block;
++ (UIView*)add_view:(nullable QuickCustomView)block;
+UIView* Add_View(QuickCustomView block);
 /*!
 * @brief superView
 */
-@property (nonatomic,strong,readonly) UIView *(^mz_superView)(UIView* superView);
+@property (nonatomic,strong,readonly) UIView *(^add_superView)(UIView* superView);
 /*!
 * @brief frame
 */
-@property (nonatomic,assign,readonly) UIView *(^mz_frame)(CGRect frame);
+@property (nonatomic,assign,readonly) UIView *(^add_frame)(CGRect frame);
 /*!
 * @brief Masonry autoLayout
 */
-@property (nonatomic,copy,  readonly) UIView *(^mz_constraints)(QuickConstraint formConstraint,UIView *superView);
-@property (nonatomic,strong,readonly) UIView *(^mz_backgroundColor)(UIColor* backgroundColor);
-@property (nonatomic,assign,readonly) UIView *(^mz_cornerRadius)(CGFloat cornerRadius);
+@property (nonatomic,copy,  readonly) UIView *(^add_constraints)(QuickConstraint formConstraint,UIView *superView);
+@property (nonatomic,strong,readonly) UIView *(^add_backgroundColor)(UIColor* backgroundColor);
+@property (nonatomic,assign,readonly) UIView *(^add_cornerRadius)(CGFloat cornerRadius);
 /*!
 * @brief init
 * @param block self
 */
-@property (nonatomic,copy,  readonly) UIView *(^mz_event)(QuickCustomEvent block);
-@property (nonatomic,assign,readonly) UIView *(^mz_userInteractionEnabled)(BOOL userInteractionEnabled);
-@property (nonatomic, copy) QuickCustomEvent mz_block;
+@property (nonatomic,copy,  readonly) UIView *(^add_event)(QuickCustomEvent block);
+@property (nonatomic,assign,readonly) UIView *(^add_userInteractionEnabled)(BOOL userInteractionEnabled);
+@property (nonatomic, copy) QuickCustomEvent add_block;
 @end
 
 @interface UILabel (WMZQuickView)
@@ -63,13 +64,14 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UILabel*)mz_view:(nullable QuickCustomLabel)block;
-@property (nonatomic,strong,readonly) UILabel *(^mz_textColor)(UIColor* textColor);
-@property (nonatomic,strong,readonly) UILabel *(^mz_font)(UIFont* font);
-@property (nonatomic,strong,readonly) UILabel *(^mz_text)(NSString* text);
-@property (nonatomic,strong,readonly) UILabel *(^mz_attributedText)(NSAttributedString* attributedText);
-@property (nonatomic,assign,readonly) UILabel *(^mz_textAlignment)(NSTextAlignment textAlignment);
-@property (nonatomic,assign,readonly) UILabel *(^mz_numberOfLines)(NSInteger numberOfLines);
++ (UILabel*)add_view:(nullable QuickCustomLabel)block;
+UILabel* Add_Label(QuickCustomLabel block);
+@property (nonatomic,strong,readonly) UILabel *(^add_textColor)(UIColor* textColor);
+@property (nonatomic,strong,readonly) UILabel *(^add_font)(UIFont* font);
+@property (nonatomic,strong,readonly) UILabel *(^add_text)(NSString* text);
+@property (nonatomic,strong,readonly) UILabel *(^add_attributedText)(NSAttributedString* attributedText);
+@property (nonatomic,assign,readonly) UILabel *(^add_textAlignment)(NSTextAlignment textAlignment);
+@property (nonatomic,assign,readonly) UILabel *(^add_numberOfLines)(NSInteger numberOfLines);
 @end
 
 @interface UIButton (WMZQuickView)
@@ -77,15 +79,16 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UIButton*)mz_view:(nullable QuickCustomButton)block;
-@property (nonatomic,strong,readonly) UIButton *(^mz_state_titleColor)(UIColor* textColor,UIControlState state);
-@property (nonatomic,strong,readonly) UIButton *(^mz_state_title)(NSString* title,UIControlState state);
-@property (nonatomic,strong,readonly) UIButton *(^mz_state_image)(UIImage* image,UIControlState state);
-@property (nonatomic,strong,readonly) UIButton *(^mz_titleColor)(UIColor* textColor);
-@property (nonatomic,strong,readonly) UIButton *(^mz_title)(NSString* title);
-@property (nonatomic,strong,readonly) UIButton *(^mz_image)(UIImage* image);
-@property (nonatomic,strong,readonly) UIButton *(^mz_font)(UIFont* font);
-@property (nonatomic,copy,  readonly) UIButton *(^mz_event)(QuickCustomEvent block);
++ (UIButton*)add_view:(nullable QuickCustomButton)block;
+UIButton* Add_Button(QuickCustomButton block);
+@property (nonatomic,strong,readonly) UIButton *(^add_state_titleColor)(UIColor* textColor,UIControlState state);
+@property (nonatomic,strong,readonly) UIButton *(^add_state_title)(NSString* title,UIControlState state);
+@property (nonatomic,strong,readonly) UIButton *(^add_state_image)(UIImage* image,UIControlState state);
+@property (nonatomic,strong,readonly) UIButton *(^add_titleColor)(UIColor* textColor);
+@property (nonatomic,strong,readonly) UIButton *(^add_title)(NSString* title);
+@property (nonatomic,strong,readonly) UIButton *(^add_image)(UIImage* image);
+@property (nonatomic,strong,readonly) UIButton *(^add_font)(UIFont* font);
+@property (nonatomic,copy,  readonly) UIButton *(^add_event)(QuickCustomEvent block);
 @end
 
 @interface UIImageView (WMZQuickView)
@@ -93,10 +96,11 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UIImageView*)mz_view:(nullable QuickCustomImageView)block;
-@property (nonatomic,strong,readonly) UIImageView *(^mz_image)(UIImage* image);
-@property (nonatomic,assign,readonly) UIImageView *(^mz_contentMode)(UIViewContentMode contentMode);
-@property (nonatomic,assign,readonly) UIImageView *(^mz_cornerRadius)(CGFloat cornerRadius);
++ (UIImageView*)add_view:(nullable QuickCustomImageView)block;
+UIImageView* Add_ImageView(QuickCustomImageView block);
+@property (nonatomic,strong,readonly) UIImageView *(^add_image)(UIImage* image);
+@property (nonatomic,assign,readonly) UIImageView *(^add_contentMode)(UIViewContentMode contentMode);
+@property (nonatomic,assign,readonly) UIImageView *(^add_cornerRadius)(CGFloat cornerRadius);
 @end
 
 
@@ -105,14 +109,15 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UITextField*)mz_view:(nullable QuickCustomTextField)block;
-@property (nonatomic,weak,  readonly) UITextField *(^mz_delegate)(id<UITextFieldDelegate> delegate);
-@property (nonatomic,strong,readonly) UITextField *(^mz_textColor)(UIColor* textColor);
-@property (nonatomic,strong,readonly) UITextField *(^mz_font)(UIFont* font);
-@property (nonatomic,strong,readonly) UITextField *(^mz_text)(NSString* text);
-@property (nonatomic,assign,readonly) UITextField *(^mz_textAlignment)(NSTextAlignment textAlignment);
-@property (nonatomic,strong,readonly) UITextField *(^mz_placeholder)(NSString* placeholder);
-@property (nonatomic,assign,readonly) UITextField *(^mz_keyboardType)(UIKeyboardType keyboardType);
++ (UITextField*)add_view:(nullable QuickCustomTextField)block;
+UITextField* Add_TextField(QuickCustomTextField block);
+@property (nonatomic,weak,  readonly) UITextField *(^add_delegate)(id<UITextFieldDelegate> delegate);
+@property (nonatomic,strong,readonly) UITextField *(^add_textColor)(UIColor* textColor);
+@property (nonatomic,strong,readonly) UITextField *(^add_font)(UIFont* font);
+@property (nonatomic,strong,readonly) UITextField *(^add_text)(NSString* text);
+@property (nonatomic,assign,readonly) UITextField *(^add_textAlignment)(NSTextAlignment textAlignment);
+@property (nonatomic,strong,readonly) UITextField *(^add_placeholder)(NSString* placeholder);
+@property (nonatomic,assign,readonly) UITextField *(^add_keyboardType)(UIKeyboardType keyboardType);
 @end
 
 @interface UITextView (WMZQuickView)
@@ -120,13 +125,14 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UITextView*)mz_view:(nullable QuickCustomTextView)block;
-@property (nonatomic,weak,  readonly) UITextView *(^mz_delegate)(id<UITextViewDelegate> delegate);
-@property (nonatomic,strong,readonly) UITextView *(^mz_textColor)(UIColor* textColor);
-@property (nonatomic,strong,readonly) UITextView *(^mz_font)(UIFont* font);
-@property (nonatomic,strong,readonly) UITextView *(^mz_text)(NSString* text);
-@property (nonatomic,assign,readonly) UITextView *(^mz_textAlignment)(NSTextAlignment textAlignment);
-@property (nonatomic,assign,readonly) UITextView *(^mz_keyboardType)(UIKeyboardType keyboardType);
++ (UITextView*)add_view:(nullable QuickCustomTextView)block;
+UITextView* Add_TextView(QuickCustomTextView block);
+@property (nonatomic,weak,  readonly) UITextView *(^add_delegate)(id<UITextViewDelegate> delegate);
+@property (nonatomic,strong,readonly) UITextView *(^add_textColor)(UIColor* textColor);
+@property (nonatomic,strong,readonly) UITextView *(^add_font)(UIFont* font);
+@property (nonatomic,strong,readonly) UITextView *(^add_text)(NSString* text);
+@property (nonatomic,assign,readonly) UITextView *(^add_textAlignment)(NSTextAlignment textAlignment);
+@property (nonatomic,assign,readonly) UITextView *(^add_keyboardType)(UIKeyboardType keyboardType);
 @end
 
 @interface UISwitch (WMZQuickView)
@@ -134,12 +140,13 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UISwitch*)mz_view:(nullable QuickCustomSwitch)block;
-@property (nonatomic,strong,readonly) UISwitch *(^mz_onImage)(UIImage* onImage);
-@property (nonatomic,strong,readonly) UISwitch *(^mz_offImage)(UIImage* offImage);
-@property (nonatomic,strong,readonly) UISwitch *(^mz_onTintColor)(UIColor* onTintColor);
-@property (nonatomic,strong,readonly) UISwitch *(^mz_thumbTintColor)(UIColor* thumbTintColor);
-@property (nonatomic,copy,  readonly) UISwitch *(^mz_event)(QuickCustomEvent block);
++ (UISwitch*)add_view:(nullable QuickCustomSwitch)block;
+UISwitch* Add_Switch(QuickCustomSwitch block);
+@property (nonatomic,strong,readonly) UISwitch *(^add_onImage)(UIImage* onImage);
+@property (nonatomic,strong,readonly) UISwitch *(^add_offImage)(UIImage* offImage);
+@property (nonatomic,strong,readonly) UISwitch *(^add_onTintColor)(UIColor* onTintColor);
+@property (nonatomic,strong,readonly) UISwitch *(^add_thumbTintColor)(UIColor* thumbTintColor);
+@property (nonatomic,copy,  readonly) UISwitch *(^add_event)(QuickCustomEvent block);
 @end
 
 @interface UISlider (WMZQuickView)
@@ -147,14 +154,15 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UISlider*)mz_view:(nullable QuickCustomSlider)block;
-@property (nonatomic,assign,readonly) UISlider *(^mz_value)(float value);
-@property (nonatomic,assign,readonly) UISlider *(^mz_minimumValue)(float minimumValue);
-@property (nonatomic,assign,readonly) UISlider *(^mz_maximumValue)(float maximumValue);
-@property (nonatomic,strong,readonly) UISlider *(^mz_minimumTrackTintColor)(UIColor* minimumTrackTintColor);
-@property (nonatomic,strong,readonly) UISlider *(^mz_thumbTintColor)(UIColor* thumbTintColor);
-@property (nonatomic,strong,readonly) UISlider *(^mz_maximumTrackTintColor)(UIColor* maximumTrackTintColor);
-@property (nonatomic,copy,  readonly) UISlider *(^mz_event)(QuickCustomEvent block);
++ (UISlider*)add_view:(nullable QuickCustomSlider)block;
+UISlider* Add_Slider(QuickCustomSlider block);
+@property (nonatomic,assign,readonly) UISlider *(^add_value)(float value);
+@property (nonatomic,assign,readonly) UISlider *(^add_minimumValue)(float minimumValue);
+@property (nonatomic,assign,readonly) UISlider *(^add_maximumValue)(float maximumValue);
+@property (nonatomic,strong,readonly) UISlider *(^add_minimumTrackTintColor)(UIColor* minimumTrackTintColor);
+@property (nonatomic,strong,readonly) UISlider *(^add_thumbTintColor)(UIColor* thumbTintColor);
+@property (nonatomic,strong,readonly) UISlider *(^add_maximumTrackTintColor)(UIColor* maximumTrackTintColor);
+@property (nonatomic,copy,  readonly) UISlider *(^add_event)(QuickCustomEvent block);
 @end
 
 @interface UIProgressView(WMZQuickView)
@@ -162,12 +170,13 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UIProgressView*)mz_view:(nullable QuickCustomProgressView)block;
-@property (nonatomic,assign,readonly) UIProgressView *(^mz_progressViewStyle)(UIProgressViewStyle progressViewStyle);
-@property (nonatomic,assign,readonly) UIProgressView *(^mz_progress)(float progress);
-@property (nonatomic,strong,readonly) UIProgressView *(^mz_progressTintColor)(UIColor* progressTintColor);
-@property (nonatomic,strong,readonly) UIProgressView *(^mz_trackTintColor)(UIColor* trackTintColor);
-@property (nonatomic,copy,  readonly) UIProgressView *(^mz_event)(QuickCustomEvent block);
++ (UIProgressView*)add_view:(nullable QuickCustomProgressView)block;
+UIProgressView* Add_ProgressView(QuickCustomProgressView block);
+@property (nonatomic,assign,readonly) UIProgressView *(^add_progressViewStyle)(UIProgressViewStyle progressViewStyle);
+@property (nonatomic,assign,readonly) UIProgressView *(^add_progress)(float progress);
+@property (nonatomic,strong,readonly) UIProgressView *(^add_progressTintColor)(UIColor* progressTintColor);
+@property (nonatomic,strong,readonly) UIProgressView *(^add_trackTintColor)(UIColor* trackTintColor);
+@property (nonatomic,copy,  readonly) UIProgressView *(^add_event)(QuickCustomEvent block);
 @end
 
 @interface UITableView(WMZQuickView)
@@ -176,16 +185,17 @@ NS_ASSUME_NONNULL_BEGIN
 * @param style style
 * @param block self
 */
-+ (UITableView*)mz_view:(nullable QuickCustomTableView)block style:(UITableViewStyle)style;
-@property (nonatomic,weak,  readonly) UITableView *(^mz_dataSource)(id <UITableViewDataSource> dataSource);
-@property (nonatomic,weak,  readonly) UITableView *(^mz_delegate)(id<UITableViewDelegate> delegate);
-@property (nonatomic,assign,readonly) UITableView *(^mz_keyboardDismissMode)(UIScrollViewKeyboardDismissMode keyboardDismissMode);
-@property (nonatomic,assign,readonly) UITableView *(^mz_separatorStyle)(UITableViewCellSeparatorStyle separatorStyle);
-@property (nonatomic,copy,readonly) UITableView *(^mz_registerCellClass)(NSArray<NSString*>* cellClassArr);
-@property (nonatomic,copy,readonly) UITableView *(^mz_registerHeaderFooterClass)(NSArray<NSString*>* cellClassArr);
-@property (nonatomic,assign,readonly) UITableView *(^mz_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
++ (UITableView*)add_view:(nullable QuickCustomTableView)block style:(UITableViewStyle)style;
+UITableView* Add_TableView(QuickCustomTableView block,UITableViewStyle style);
+@property (nonatomic,weak,  readonly) UITableView *(^add_dataSource)(id <UITableViewDataSource> dataSource);
+@property (nonatomic,weak,  readonly) UITableView *(^add_delegate)(id<UITableViewDelegate> delegate);
+@property (nonatomic,assign,readonly) UITableView *(^add_keyboardDismissMode)(UIScrollViewKeyboardDismissMode keyboardDismissMode);
+@property (nonatomic,assign,readonly) UITableView *(^add_separatorStyle)(UITableViewCellSeparatorStyle separatorStyle);
+@property (nonatomic,copy,readonly) UITableView *(^add_registerCellClass)(NSArray<NSString*>* cellClassArr);
+@property (nonatomic,copy,readonly) UITableView *(^add_registerHeaderFooterClass)(NSArray<NSString*>* cellClassArr);
+@property (nonatomic,assign,readonly) UITableView *(^add_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
 @property (nonatomic,assign,readonly) UITableView
-    *(^mz_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
+    *(^add_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
 @end
 
 @interface UICollectionView(WMZQuickView)
@@ -194,16 +204,17 @@ NS_ASSUME_NONNULL_BEGIN
 * @param layout UICollectionViewFlowLayout
 * @param block self
 */
-+ (UICollectionView*)mz_view:(nullable QuickCustomCollectionView)block layout:(UICollectionViewFlowLayout*)layout;
-@property (nonatomic,weak,  readonly) UICollectionView *(^mz_dataSource)(id <UICollectionViewDataSource> dataSource);
-@property (nonatomic,weak,  readonly) UICollectionView *(^mz_delegate)(id<UICollectionViewDelegate> delegate);
-@property (nonatomic,assign,readonly) UICollectionView *(^mz_keyboardDismissMode)(UIScrollViewKeyboardDismissMode keyboardDismissMode);
-@property (nonatomic,copy,readonly) UICollectionView *(^mz_registerCellClass)(NSArray<NSString*>* cellClassArr);
-@property (nonatomic,copy,readonly) UICollectionView *(^mz_registerHeaderClass)(NSArray<NSString*>* cellClassArr);
-@property (nonatomic,copy,readonly) UICollectionView *(^mz_registerFooterClass)(NSArray<NSString*>* cellClassArr);
-@property (nonatomic,assign,readonly) UICollectionView *(^mz_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
++ (UICollectionView*)add_view:(nullable QuickCustomCollectionView)block layout:(UICollectionViewFlowLayout*)layout;
+UICollectionView* Add_CollectionView(QuickCustomCollectionView block,UICollectionViewFlowLayout* layout);
+@property (nonatomic,weak,  readonly) UICollectionView *(^add_dataSource)(id <UICollectionViewDataSource> dataSource);
+@property (nonatomic,weak,  readonly) UICollectionView *(^add_delegate)(id<UICollectionViewDelegate> delegate);
+@property (nonatomic,assign,readonly) UICollectionView *(^add_keyboardDismissMode)(UIScrollViewKeyboardDismissMode keyboardDismissMode);
+@property (nonatomic,copy,readonly) UICollectionView *(^add_registerCellClass)(NSArray<NSString*>* cellClassArr);
+@property (nonatomic,copy,readonly) UICollectionView *(^add_registerHeaderClass)(NSArray<NSString*>* cellClassArr);
+@property (nonatomic,copy,readonly) UICollectionView *(^add_registerFooterClass)(NSArray<NSString*>* cellClassArr);
+@property (nonatomic,assign,readonly) UICollectionView *(^add_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
 @property (nonatomic,assign,readonly) UICollectionView
-    *(^mz_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
+    *(^add_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
 
 @end
 
@@ -215,10 +226,11 @@ NS_ASSUME_NONNULL_BEGIN
 * @param sectionInset sectionInset
 * @param block self
 */
-+ (UICollectionViewFlowLayout*)mz_flowLayout:(CGFloat)minimumLineSpacing
++ (UICollectionViewFlowLayout*)add_flowLayout:(CGFloat)minimumLineSpacing
                      minimumInteritemSpacing:(CGFloat)minimumInteritemSpacing
                                 sectionInset:(UIEdgeInsets)sectionInset
                                        block:(nullable QuickCollectionViewFlowLayout)block;
+UICollectionViewFlowLayout* Add_FlowLayout(CGFloat minimumLineSpacing,CGFloat minimumInteritemSpacing,UIEdgeInsets sectionInset,QuickCollectionViewFlowLayout block);
 @end
 
 @interface UIScrollView(WMZQuickView)
@@ -226,16 +238,17 @@ NS_ASSUME_NONNULL_BEGIN
 * @brief init
 * @param block self
 */
-+ (UIScrollView*)mz_view:(nullable QuickCustomScrollView)block;
-@property (nonatomic,weak,  readonly) UIScrollView *(^mz_delegate)(id<UIScrollViewDelegate> delegate);
++ (UIScrollView*)add_view:(nullable QuickCustomScrollView)block;
+UIScrollView* Add_ScrollView(QuickCustomScrollView block);
+@property (nonatomic,weak,  readonly) UIScrollView *(^add_delegate)(id<UIScrollViewDelegate> delegate);
 @property (nonatomic,assign,readonly) UIScrollView
-*(^mz_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
+*(^add_showsHorizontalScrollIndicator)(BOOL showsHorizontalScrollIndicator);
 @property (nonatomic,assign,readonly) UIScrollView
-    *(^mz_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
+    *(^add_showsVerticalScrollIndicator)(BOOL showsVerticalScrollIndicator);
 @property (nonatomic,assign,readonly) UIScrollView
-*(^mz_contentOffset)(CGPoint contentOffset);
+*(^add_contentOffset)(CGPoint contentOffset);
 @property (nonatomic,assign,readonly) UIScrollView
-*(^mz_contentSize)(CGSize contentSize);
+*(^add_contentSize)(CGSize contentSize);
 
 @end
 NS_ASSUME_NONNULL_END
