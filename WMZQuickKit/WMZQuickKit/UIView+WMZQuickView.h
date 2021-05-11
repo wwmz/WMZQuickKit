@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #if __has_include(<Masonry/Masonry.h>)
 #import <Masonry/Masonry.h>
 #else
 #import "Masonry.h"
 #endif
+typedef void (^QuickLongGuesture)         (UILongPressGestureRecognizer* _Nonnull longGuesture);
 typedef void (^QuickCustomView)           (UIView * _Nonnull view);
 typedef void (^QuickCustomLabel)          (UILabel * _Nonnull label);
 typedef void (^QuickCustomButton)         (UIButton * _Nonnull button);
@@ -36,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (UIView*)add_view:(nullable QuickCustomView)block;
 UIView* Add_View(QuickCustomView block);
+- (void)addAnimal;
 /*!
 * @brief superView
 */
@@ -49,6 +52,7 @@ UIView* Add_View(QuickCustomView block);
 */
 @property (nonatomic,copy,  readonly) UIView *(^add_constraints)(QuickConstraint formConstraint,UIView *superView);
 @property (nonatomic,strong,readonly) UIView *(^add_backgroundColor)(UIColor* backgroundColor);
+@property (nonatomic,strong,readonly) UIView *(^add_bgBackgroundColor)(UIColor* backgroundColor);
 @property (nonatomic,assign,readonly) UIView *(^add_cornerRadius)(CGFloat cornerRadius);
 /*!
 * @brief init
@@ -56,7 +60,10 @@ UIView* Add_View(QuickCustomView block);
 */
 @property (nonatomic,copy,  readonly) UIView *(^add_event)(QuickCustomEvent block);
 @property (nonatomic,assign,readonly) UIView *(^add_userInteractionEnabled)(BOOL userInteractionEnabled);
+@property (nonatomic,copy,  readonly) UIView *(^add_longEvent)(QuickLongGuesture block);
 @property (nonatomic, copy) QuickCustomEvent add_block;
+@property (nonatomic, copy) QuickLongGuesture add_longBlock;
+@property (nonatomic, strong) CALayer *anLayer;
 @end
 
 @interface UILabel (WMZQuickView)
@@ -89,6 +96,7 @@ UIButton* Add_Button(QuickCustomButton block);
 @property (nonatomic,strong,readonly) UIButton *(^add_image)(UIImage* image);
 @property (nonatomic,strong,readonly) UIButton *(^add_font)(UIFont* font);
 @property (nonatomic,copy,  readonly) UIButton *(^add_event)(QuickCustomEvent block);
+@property (nonatomic,strong,readonly) UIButton *(^add_state_event)(QuickCustomEvent block,UIControlEvents state);
 @end
 
 @interface UIImageView (WMZQuickView)
@@ -250,5 +258,22 @@ UIScrollView* Add_ScrollView(QuickCustomScrollView block);
 @property (nonatomic,assign,readonly) UIScrollView
 *(^add_contentSize)(CGSize contentSize);
 
+@end
+
+typedef enum :NSInteger{
+    BtnPositionLeft     = 0,            //图片在左，文字在右，默认
+    BtnPositionRight    = 1,            //图片在右，文字在左
+    BtnPositionTop      = 2,            //图片在上，文字在下
+    BtnPositionBottom   = 3,            //图片在下，文字在上
+}BtnPosition;
+@interface UIButton(Position)
+- (void)TagSetImagePosition:(BtnPosition)postion spacing:(CGFloat)spacing;
+@end
+
+@interface CALayer (LayerColor)
+- (void)setBorderColorFromUIColor:(UIColor *)color;
+@end
+
+@interface QuickButton:UIButton
 @end
 NS_ASSUME_NONNULL_END

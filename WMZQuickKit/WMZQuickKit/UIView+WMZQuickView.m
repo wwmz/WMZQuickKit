@@ -5,10 +5,11 @@
 //  Created by wmz on 2020/11/18.
 //  Copyright © 2020 wmz. All rights reserved.
 //
-
 #import "UIView+WMZQuickView.h"
 #import <objc/runtime.h>
 static NSString *add_blockKey = @"add_blockKey";
+static NSString *add_blockLongKey = @"add_blockLongKey";
+static NSString *add_anLayerKey = @"add_anLayerKey";
 @implementation UIView (WMZQuickView)
 @dynamic add_block;
 UIView* Add_View(QuickCustomView block){
@@ -32,6 +33,10 @@ UIView* Add_View(QuickCustomView block){
     return ^UIView*(UIColor* backgroundColor){
         self.layer.backgroundColor = backgroundColor.CGColor;return self;};
 }
+- (UIView * _Nonnull (^)(UIColor * _Nonnull))add_bgBackgroundColor{
+    return ^UIView*(UIColor* backgroundColor){
+        self.backgroundColor = backgroundColor;return self;};
+}
 - (UIView * _Nonnull (^)(CGFloat))add_cornerRadius{
     return ^UIView*(CGFloat cornerRadius){
         self.layer.cornerRadius = cornerRadius;return self;};
@@ -52,6 +57,17 @@ UIView* Add_View(QuickCustomView block){
       UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonAction:)];
       [self addGestureRecognizer:tapGesture]; return self;};
 }
+
+- (UIView * _Nonnull (^)(QuickLongGuesture _Nonnull))add_longEvent{
+    return ^UIView*(QuickLongGuesture block){
+      self.add_longBlock = block;
+      self.userInteractionEnabled = YES;
+        UILongPressGestureRecognizer *tapGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longAction:)];
+      [self addGestureRecognizer:tapGesture]; return self;};
+}
+- (void)longAction:(UILongPressGestureRecognizer*)sender{
+    if (self.add_longBlock) {self.add_longBlock(sender);}
+}
 - (void)buttonAction:(UIView*)sender{
     if (self.add_block) {self.add_block(sender);}
 }
@@ -60,6 +76,18 @@ UIView* Add_View(QuickCustomView block){
 }
 -(QuickCustomEvent)add_block{
      return objc_getAssociatedObject(self, &add_blockKey);
+}
+- (void)setAdd_longBlock:(QuickLongGuesture)add_longBlock{
+    objc_setAssociatedObject(self, &add_blockLongKey, add_longBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+- (QuickLongGuesture)add_longBlock{
+    return objc_getAssociatedObject(self, &add_blockLongKey);
+}
+- (void)setAnLayer:(CALayer *)anLayer{
+     objc_setAssociatedObject(self, &add_anLayerKey, anLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (CALayer *)anLayer{
+    return objc_getAssociatedObject(self, &add_anLayerKey);
 }
 @end
 
@@ -102,7 +130,7 @@ UIButton* Add_Button(QuickCustomButton block){
     return [UIButton add_view:block];
 }
 + (UIButton *)add_view:(QuickCustomButton)block{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *button = [QuickButton buttonWithType:UIButtonTypeCustom];
     if (block) {block(button);}
     return button;
 }
@@ -138,6 +166,11 @@ UIButton* Add_Button(QuickCustomButton block){
     return ^UIButton*(QuickCustomEvent block){
         self.add_block = block;
         [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];return self;};
+}
+- (UIButton * _Nonnull (^)(QuickCustomEvent _Nonnull, UIControlEvents))add_state_event{
+    return ^UIButton*(QuickCustomEvent block,UIControlEvents state){
+        self.add_block = block;
+        [self addTarget:self action:@selector(buttonAction:) forControlEvents:state];return self;};
 }
 @end
 
@@ -238,6 +271,12 @@ UITextView* Add_TextView(QuickCustomTextView block){
     return ^UITextField*(UIKeyboardType keyboardType){
         [self setKeyboardType:keyboardType];return self;};
 }
+
+- (UITextField * _Nonnull (^)(QuickCustomEvent))add_event{
+    return ^UITextField*(QuickCustomEvent block){
+        self.add_block = block;
+        [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventEditingChanged];return self;};
+}
 @end
 
 @implementation UITextView(WMZQuickView)
@@ -311,7 +350,12 @@ UISlider* Add_Slider(QuickCustomSlider block){
 - (UISlider * _Nonnull (^)(QuickCustomEvent))add_event{
     return ^UISlider*(QuickCustomEvent block){
         self.add_block = block;
-        [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventValueChanged];return self;};
+        [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];return self;};
+}
+- (UISlider * _Nonnull (^)(QuickLongGuesture))add_longEvent{
+    return ^UISlider*(QuickLongGuesture block){
+        self.add_longBlock = block;
+        [self addTarget:self action:@selector(longAction:) forControlEvents:UIControlEventValueChanged];return self;};
 }
 @end
 
@@ -349,6 +393,7 @@ UITableView* Add_TableView(QuickCustomTableView block,UITableViewStyle style){
 + (UITableView*)add_view:(nullable QuickCustomTableView)block style:(UITableViewStyle)style{
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero style:style];
     tableView.estimatedRowHeight = 100;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     if (@available(iOS 11.0, *)) {
         tableView.estimatedSectionHeaderHeight = 0.01;
         tableView.estimatedSectionFooterHeight = 0.01;
@@ -531,5 +576,57 @@ UIScrollView* Add_ScrollView(QuickCustomScrollView block){
 - (UIScrollView * _Nonnull (^)(CGPoint))add_contentOffset{
     return ^UIScrollView*(CGPoint contentOffset){
         [self setContentOffset:contentOffset];return self;};
+}
+@end
+
+@implementation UIButton(Position)
+- (void)TagSetImagePosition:(BtnPosition)postion spacing:(CGFloat)spacing {
+    [self layoutIfNeeded];
+     CGFloat imgWidth = self.imageView.bounds.size.width;
+     CGFloat imgHeight = self.imageView.bounds.size.height;
+     CGFloat labWidth = self.titleLabel.bounds.size.width;
+     CGFloat labHeight = self.titleLabel.bounds.size.height;
+     CGSize textSize = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:self.titleLabel.font}];
+     CGSize frameSize = CGSizeMake(ceilf(textSize.width), ceilf(textSize.height));
+     labWidth = MAX(labWidth, frameSize.width);
+     labHeight = MIN(labHeight, frameSize.height);
+     CGFloat kMargin = spacing/2.0;
+     switch (postion) {
+         case BtnPositionLeft:
+             [self setImageEdgeInsets:UIEdgeInsetsMake(0, -kMargin, 0, kMargin)];
+             [self setTitleEdgeInsets:UIEdgeInsetsMake(0, kMargin, 0, -kMargin)];
+             break;
+             
+         case BtnPositionRight:
+             [self setImageEdgeInsets:UIEdgeInsetsMake(0, labWidth + kMargin, 0, -labWidth - kMargin)];
+             [self setTitleEdgeInsets:UIEdgeInsetsMake(0, -imgWidth - kMargin, 0, imgWidth + kMargin)];
+             break;
+             
+         case BtnPositionTop:
+             [self setImageEdgeInsets:UIEdgeInsetsMake(0,0, labHeight + spacing, -labWidth)];
+             [self setTitleEdgeInsets:UIEdgeInsetsMake(imgHeight + spacing, -imgWidth, 0, 0)];
+             break;
+             
+         case BtnPositionBottom:
+             [self setImageEdgeInsets:UIEdgeInsetsMake(labHeight + spacing,0, 0, -labWidth)];
+             [self setTitleEdgeInsets:UIEdgeInsetsMake(0, -imgWidth, imgHeight + spacing, 0)];
+             break;
+             
+         default:
+             break;
+     }
+}
+
+@end
+@implementation CALayer (LayerColor)
+- (void)setBorderColorFromUIColor:(UIColor *)color{
+    self.borderColor = color.CGColor;
+}
+@end
+
+
+@implementation QuickButton
+- (void)layoutSubviews{
+    [super layoutSubviews];
 }
 @end
